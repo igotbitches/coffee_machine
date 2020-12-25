@@ -7,11 +7,12 @@ int main(){
 	
 	double progress = 0.0;
 	while (progress <= 1.0) {
-    	int barWidth = 30;
+		
+    	int barWidth = 20;
 
 	    cout << "[";
-	    int pos = barWidth * progress;
-	    for (int i = 0; i < barWidth; ++i) {
+	    int pos = progress * barWidth;
+	    for (int i = 0; i < barWidth; i++) {
 	    	Sleep(50);
 	        if (i < pos){
 	        	cout << "=";	
@@ -23,12 +24,13 @@ int main(){
 	        	cout << " ";
 			} 
 	    }
-	    cout << "] " << int(progress * 100.0) << " %\r";
+	    cout << "] " << progress * 100 << " %\r";
 	
 	    progress += 0.10;
 	}
 	
-	cout << endl;
+	cout << endl << endl;
+	cout << "Take your coffee!";
 	
 	return 0;
 }
