@@ -7,23 +7,21 @@ using namespace std;
 void userMenu(double cash, int cups);
 void serviceMenu();
 int usChoice(int &choice);
-void inputCash(double &balance, double &cash);
-void takeCash(double &balance);
+void inputCash(double &total, double &cash);
+void takeCash(double &total);
 int checkPIN();
 
 
 int main(){
-	int choice = 0;
-	double balance = 0;
-	int cups = 7;
-	double cash = 0;
+	int choice = 0, cups = 7;
+	double total = 0, cash = 0;
 	
 	while(true){
 		userMenu(cash, cups);
 		usChoice(choice);
 		
 		if (choice == 1){
-			inputCash(balance, cash);
+			inputCash(total, cash);
 		}
 		else if (choice == 2){
 			cout << "Espresso" << endl;
@@ -41,13 +39,13 @@ int main(){
 					usChoice(choice);
 				
 					if (choice == 1){
-						cout << "The machine have " << balance << " BYN" << endl << endl;
+						cout << "The machine have " << total << " BYN" << endl << endl;
 					}
 					else if (choice == 2){
 						cout << "Empty cups: " << cups << " pieces." << endl;
 					}
 					else if (choice == 3){
-						takeCash(balance);
+						takeCash(total);
 					}
 					else if (choice == 0){
 						break;
@@ -103,22 +101,22 @@ int usChoice(int &choice){
 }
 
 
-void inputCash(double &balance, double &cash){
-	double input = 0;
+void inputCash(double &total, double &cash){
+	double inputCash = 0;
 	
 	cout << "The machine does not give change." << endl;
 	cout << "Input cash: ";
-	cin >> input;
+	cin >> inputCash;
 	cout << endl;
 	
-	balance += input;
-	cash += input;
+	total += inputCash;
+	cash += inputCash;
 }
 
 
-void takeCash(double &balance){ //we need also take money from cash! I dont know about this. I need to ask.
-	cout << "You take: " << balance << " BYN" << endl << endl;
-	balance = 0;
+void takeCash(double &total){ //we need also take money from cash! I dont know about this. I need to ask.
+	cout << "You take: " << total << " BYN" << endl << endl;
+	total = 0;
 }
 
 
