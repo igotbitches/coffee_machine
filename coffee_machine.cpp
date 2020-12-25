@@ -1,6 +1,10 @@
 #include <iostream>
+#include <windows.h>
 
 #define SERVICE_PIN 9917
+#define ESPRESSO_COST 1.5
+#define LATTE_COST 2.5
+#define CAPPUCCINO 2.5
 
 using namespace std;
 
@@ -11,6 +15,8 @@ void inputCash(double &total, double &cash);
 void takeCash(double &total);
 int checkPIN();
 
+void takeCoffee(int &cups, double &cash, double coffeeCost, double &total); // experimental function // need to update
+void progressBar(); // experimental, looks great
 
 int main(){
 	int choice = 0, cups = 7;
@@ -24,7 +30,7 @@ int main(){
 			inputCash(total, cash);
 		}
 		else if (choice == 2){
-			cout << "Espresso" << endl;
+			takeCoffee(cups, cash, ESPRESSO_COST, total);
 		}
 		else if (choice == 3){
 			cout << "Cappuccino" << endl;
@@ -125,6 +131,7 @@ int checkPIN(){
 	int pin = 0;
 	
 	while (counter != 0){
+		cout << "You have " << counter << " attempt(s)." << endl;
 		cout << "Please, input PIN: ";
 		cin >> pin;
 		cout << endl;
@@ -140,4 +147,50 @@ int checkPIN(){
 	return counter;	
 }
 
+
+void takeCoffee(int &cups, double &cash, double coffeeCost, double &total){
+	if (cash >= coffeeCost){
+		cash -= coffeeCost;
+		cups--;
+		cout << "Waiting for your coffee: " << endl;
+		progressBar();
+		cout << "Take your coffee!" << endl << endl;
+		Sleep(1000);
+	}
+	else {
+		cout << "Now you have " << cash << " BYN" << endl;
+		cout << "Coffee cost " << coffeeCost << " BYN" << endl;
+		cout << "You need to add " << coffeeCost - cash << " BYN" << endl << endl;
+		inputCash(total, cash);
+	}
+
+}
+
+void progressBar(){
+	double progress = 0.0;
+	while (progress <= 1.0) {
+		
+    	int barWidth = 20;
+
+	    cout << "[";
+	    int pos = progress * barWidth;
+	    for (int i = 0; i < barWidth; i++) {
+	    	Sleep(100);
+	        if (i < pos){
+	        	cout << "=";	
+			}
+	        else if (i == pos){
+	        	cout << ">";
+			}
+	        else{
+	        	cout << " ";
+			} 
+	    }
+	    cout << "] " << progress * 100 << " %\r";
+	
+	    progress += 0.10;
+	}
+	
+	cout << endl << endl;
+}
 
