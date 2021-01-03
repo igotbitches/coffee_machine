@@ -1,4 +1,4 @@
-<h1>Файл [coffee_machine_v.1.2.cpp](https://github.com/igotbitches/coffee_machine/blob/mikalai/coffee_machine_v.1.2.cpp)</h1>
+<a href="https://github.com/igotbitches/coffee_machine/blob/mikalai/coffee_machine_v.1.2.cpp">Файл [coffee_machine_v.1.2.cpp]</a>
 
 
 <ol type="a">
