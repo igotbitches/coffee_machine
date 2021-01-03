@@ -150,7 +150,7 @@ void choiceMenu(int &choice)
 void depositMenu()
 {
     cout << "Pay attention that coffee machine doesn't give change!" << endl;
-    cout << "Please deposit coins " << endl << endl;
+    cout << "Please deposit coins: " << endl << endl;
     cout << "1 - 10 coins" << endl;
     cout << "2 - 20 coins" << endl;
     cout << "3 - 50 coins" << endl;
