@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1><a href="https://github.com/igotbitches/coffee_machine/blob/mikalai/coffee_machine_v.1.2.cpp">Файл [coffee_machine_v.1.2.cpp]</a></h1>
 
 
@@ -51,3 +52,13 @@ goto оставл только при перенаправлении в серв
 </ol>
 
 
+=======
+# coffee_machine
+Будем здесь делать пометки, чтобы было удобнее вспоминать, что нужно ещё. \
+Нужно будет добавить: 
+
+`progress bar` \
+`отступы (чтобы не сливался текст и меню)` 
+
+Крутая штука - `goto`. Не знал о таком.
+>>>>>>> Artur2
