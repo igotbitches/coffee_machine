@@ -176,7 +176,7 @@ bool checkPIN()
 		cin >> pin;
 		cout << endl;
 
-		else if (pin == SERVICE_PIN){
+		if (pin == SERVICE_PIN){
 			return true;
 		}
 		else {
