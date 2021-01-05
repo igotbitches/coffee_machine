@@ -5,12 +5,11 @@
 #define ESPRESSO_COST 1.0
 #define CAPPUCCINO_COST 1.5
 #define LATTE_COST 1.5
-
 #define TEN_COINS 0.1
 #define TWENTY_COINS 0.2
 #define FIFTY_COINS 0.5
-#define ONE_RUB 1
-#define TWO_RUB 2
+#define ONE_RUB 1.0
+#define TWO_RUB 2.0
 
 using namespace std;
 
@@ -25,13 +24,14 @@ void addCups(int &cups);
 void takeCash(double &total, double &cash);
 void takeCoffee(int &cups, double &cash, double coffeeCost);
 void progressBar();
+void backToMainMenu(int &choice);
 
 int main(){
 	int choice = 0, cups = 2;
 	double total = 0, cash = 0;
 
 	while (true){
-	    if (cups <= 0){ // if we don't have cups
+	    if (cups <= 0){
             noCupsMenu();
             choiceMenu(choice);
 
@@ -47,7 +47,7 @@ int main(){
             choiceMenu(choice);
 
             if (choice == 1){
-                while (true){ //menu for INPUT money
+                while (true){
                     depositMenu();
                     choiceMenu(choice);
 
@@ -78,16 +78,19 @@ int main(){
             }
             else if (choice == 2){
                 takeCoffee(cups, cash, ESPRESSO_COST);
+                backToMainMenu(choice);
             }
             else if (choice == 3){
                 takeCoffee(cups, cash, CAPPUCCINO_COST);
+                backToMainMenu(choice);
             }
             else if (choice == 4){
                 takeCoffee(cups, cash, LATTE_COST);
+                backToMainMenu(choice);
             }
             else if (choice == 5){
                 service_menu:
-                if (checkPIN()){ //menu for SERVICE
+                if (checkPIN()){
                     while (true){
                         serviceMenu(total, cups);
                         choiceMenu(choice);
@@ -156,7 +159,6 @@ void depositMenu()
     cout << "3 - 50 coins" << endl;
     cout << "4 - 1 BYN" << endl;
     cout << "5 - 2 BYN" << endl;
-    cout << "6 - Main Menu" << endl << endl;
 }
 
 void inputMoney(double &total, double &cash, double COIN)
@@ -209,16 +211,15 @@ void takeCash(double &total, double &cash)
 
 void takeCoffee(int &cups, double &cash, double coffeeCost)
 {
-    if (cash >= coffeeCost)
-    {
+	int choice = 0;
+    if (cash >= coffeeCost){
         cash -= coffeeCost;
         cups--;
+        
         cout << "Waiting for your coffee: " << endl;
         progressBar();
-        cout << "Take your coffee!" << endl << endl;
     }
-    else
-    {
+    else{
         cout << "Coffee which you choose cost " << coffeeCost << " BYN" << endl;
         cout << "Please deposit " << coffeeCost - cash << " BYN more." << endl << endl;
     }
@@ -226,6 +227,7 @@ void takeCoffee(int &cups, double &cash, double coffeeCost)
 
 void progressBar(){
     double progress = 0.0;
+    
     while (progress <= 1.0) {
 
         int barWidth = 20;
@@ -248,11 +250,24 @@ void progressBar(){
 
         progress += 0.10;
     }
-
+    
     cout << endl << endl;
 }
 
-void noCupsMenu(){
-    cout << "We are very sorry, but unfortunately there are no cups left." << endl;
+void noCupsMenu()
+{
+	cout << "We are very sorry, but unfortunately there are no cups left." << endl;
     cout << "5 - Service " << endl << endl;
 }
+
+void backToMainMenu(int &choice)
+{
+	cout << "Here is the best Espresso/Cappuccino/Latte in the City. Please, help yourself!" << endl << endl;
+	
+	while (choice != 0){
+    	cout << "Press 0 if you want back to menu."<< endl;
+    	choiceMenu(choice);
+	}
+}
+
+    
