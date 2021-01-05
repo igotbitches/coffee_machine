@@ -177,7 +177,7 @@ bool checkPIN()
 		cout << "Please, input PIN: ";
 		cin >> pin;
 		cout << endl;
-		
+
 		if (pin == SERVICE_PIN){
 			return true;
 		}
