@@ -24,14 +24,14 @@ void addCups(int &cups);
 void takeCash(double &total, double &cash);
 void takeCoffee(int &cups, double &cash, double coffeeCost);
 void progressBar();
-void backToMainMenu(int &choice);
+void backToMainMenu(int &choice, double cash);
 
 int main(){
-	int choice = 0, cups = 2;
-	double total = 0, cash = 0;
+    int choice = 0, cups = 2;
+    double total = 0, cash = 0;
 
-	while (true){
-	    if (cups <= 0){
+    while (true){
+        if (cups <= 0){
             noCupsMenu();
             choiceMenu(choice);
 
@@ -41,13 +41,14 @@ int main(){
             else{
                 cout << "Try again." << endl << endl;
             }
-	    }
-	    else {
+        }
+        else {
             mainMenu(cash);
             choiceMenu(choice);
 
             if (choice == 1){
                 while (true){
+                    money_deposit:
                     depositMenu();
                     choiceMenu(choice);
 
@@ -77,16 +78,18 @@ int main(){
                 }
             }
             else if (choice == 2){
-                takeCoffee(cups, cash, ESPRESSO_COST);
-                backToMainMenu(choice);
+                if (cash >= ESPRESSO_COST){
+                    takeCoffee(cups, cash, ESPRESSO_COST);
+                    backToMainMenu(choice, cash);
+                } else goto money_deposit;
             }
             else if (choice == 3){
                 takeCoffee(cups, cash, CAPPUCCINO_COST);
-                backToMainMenu(choice);
+                backToMainMenu(choice, cash);
             }
             else if (choice == 4){
                 takeCoffee(cups, cash, LATTE_COST);
-                backToMainMenu(choice);
+                backToMainMenu(choice, cash);
             }
             else if (choice == 5){
                 service_menu:
@@ -115,16 +118,16 @@ int main(){
                 cout << endl << "Please, choice another." << endl << endl;
             }
         }
-	}
+    }
 
-	return 0;
+    return 0;
 }
 
 void mainMenu(double cash)
 {
-	cout << "Dear Customer, make your choice:" << endl;
-	cout << cash << " BYN" << endl << endl;
-	cout << "1 - Deposit money" << endl;
+    cout << "Balance: " << cash << " BYN" << endl;
+    cout << "Dear Customer, make your choice:" << endl << endl;
+    cout << "1 - Deposit money" << endl;
     cout << "2 - Espresso" << "\t" << ESPRESSO_COST << " BYN" << endl;
     cout << "3 - Cappuccino" << "\t" << CAPPUCCINO_COST << " BYN" << endl;
     cout << "4 - Latte" << "\t" << LATTE_COST << " BYN" << endl;
@@ -147,7 +150,6 @@ void choiceMenu(int &choice)
     cout << "Your choose: ";
     cin >> choice;
     cout << endl;
-
 }
 
 void depositMenu()
@@ -158,7 +160,7 @@ void depositMenu()
     cout << "2 - 20 coins" << endl;
     cout << "3 - 50 coins" << endl;
     cout << "4 - 1 BYN" << endl;
-    cout << "5 - 2 BYN" << endl;
+    cout << "5 - 2 BYN" << endl << endl;
 }
 
 void inputMoney(double &total, double &cash, double COIN)
@@ -170,24 +172,24 @@ void inputMoney(double &total, double &cash, double COIN)
 
 bool checkPIN()
 {
-	int counter = 3;
-	int pin = 0;
+    int counter = 3;
+    int pin = 0;
 
-	while (counter != 0){
-		cout << "Please, input PIN: ";
-		cin >> pin;
-		cout << endl;
-		
-		if (pin == SERVICE_PIN){
-			return true;
-		}
-		else {
-			cout << "PIN is wrong." << endl;
-			counter--;
-		}
-	}
+    while (counter != 0){
+        cout << "Please, input PIN: ";
+        cin >> pin;
+        cout << endl;
 
-	return false;
+        if (pin == SERVICE_PIN){
+            return true;
+        }
+        else {
+            cout << "PIN is wrong." << endl;
+            counter--;
+        }
+    }
+
+    return false;
 }
 
 void addCups(int &cups)
@@ -197,8 +199,13 @@ void addCups(int &cups)
     cout << "How many cups are you adding?: " ;
     cin >> inputCups;
 
-    cups += inputCups;
-    cout << "Completed! "<< inputCups << " was added." << endl << endl;
+    if (inputCups <= 0){
+        cout << "You need to put 1 or more cups!" << endl << endl;
+    }
+    else{
+        cups += inputCups;
+        cout << "Completed! "<< inputCups << " was added." << endl << endl;
+    }
 }
 
 void takeCash(double &total, double &cash)
@@ -211,23 +218,16 @@ void takeCash(double &total, double &cash)
 
 void takeCoffee(int &cups, double &cash, double coffeeCost)
 {
-	int choice = 0;
-    if (cash >= coffeeCost){
-        cash -= coffeeCost;
-        cups--;
-        
-        cout << "Waiting for your coffee: " << endl;
-        progressBar();
-    }
-    else{
-        cout << "Coffee which you choose cost " << coffeeCost << " BYN" << endl;
-        cout << "Please deposit " << coffeeCost - cash << " BYN more." << endl << endl;
-    }
+    cash -= coffeeCost;
+    cups--;
+
+    cout << "Waiting for your coffee: " << endl;
+    progressBar();
 }
 
 void progressBar(){
     double progress = 0.0;
-    
+
     while (progress <= 1.0) {
 
         int barWidth = 20;
@@ -250,24 +250,23 @@ void progressBar(){
 
         progress += 0.10;
     }
-    
+
     cout << endl << endl;
 }
 
 void noCupsMenu()
 {
-	cout << "We are very sorry, but unfortunately there are no cups left." << endl;
+    cout << "We are very sorry, but unfortunately there are no cups left." << endl;
     cout << "5 - Service " << endl << endl;
 }
 
-void backToMainMenu(int &choice)
+void backToMainMenu(int &choice, double cash)
 {
-	cout << "Here is the best Espresso/Cappuccino/Latte in the City. Please, help yourself!" << endl << endl;
-	
-	while (choice != 0){
-    	cout << "Press 0 if you want back to menu."<< endl;
-    	choiceMenu(choice);
-	}
-}
+    cout << "Balance: " << cash << " BYN" << endl;
+    cout << "Here is the best Espresso/Cappuccino/Latte in the City. Please, help yourself!" << endl << endl;
 
-    
+    while (choice != 0){
+        cout << "Press 0 for back to Main Menu."<< endl;
+        choiceMenu(choice);
+    }
+}
