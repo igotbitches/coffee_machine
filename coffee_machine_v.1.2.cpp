@@ -17,7 +17,7 @@ void mainMenu(double cash, int cups);
 void serviceMenu(double total, int cups);
 void choiceMenu(int &choice);
 void depositMenu();
-void inputMoney(double &total, double &cash, double COIN);
+void inputMoney(double &total, double &cash, double coin);
 int checkPIN();
 void addCups(int &cups);
 void takeCash(double &total, double &cash);
@@ -156,11 +156,11 @@ void depositMenu()
     cout << "5 - 2 BYN" << endl << endl;
 }
 
-void inputMoney(double &total, double &cash, double COIN)
+void inputMoney(double &total, double &cash, double coin)
 {
-    total += COIN;
-    cash += COIN;
-    cout << "Your deposit: " << COIN << " BYN" << endl << endl;
+    total += coin;
+    cash += coin;
+    cout << "Your deposit: " << coin << " BYN" << endl << endl;
 }
 
 int checkPIN()
