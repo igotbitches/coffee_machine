@@ -172,6 +172,7 @@ void inputMoney(double &total, double &cash, double COIN)
 
 bool checkPIN()
 {
+<<<<<<< HEAD
     int counter = 3;
     int pin = 0;
 
@@ -190,6 +191,26 @@ bool checkPIN()
     }
 
     return false;
+=======
+	int counter = 3;
+	int pin = 0;
+
+	while (counter != 0){
+		cout << "Please, input PIN: ";
+		cin >> pin;
+		cout << endl;
+
+		if (pin == SERVICE_PIN){
+			return true;
+		}
+		else {
+			cout << "PIN is wrong." << endl;
+			counter--;
+		}
+	}
+
+	return false;
+>>>>>>> 49e8418a7612871c1eba5c461ffc99488cb8912f
 }
 
 void addCups(int &cups)
