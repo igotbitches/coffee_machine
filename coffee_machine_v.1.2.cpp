@@ -84,12 +84,16 @@ int main(){
                 } else goto money_deposit;
             }
             else if (choice == 3){
-                takeCoffee(cups, cash, CAPPUCCINO_COST);
-                backToMainMenu(choice, cash);
+                if (cash >= CAPPUCCINO_COST){
+                    takeCoffee(cups, cash, CAPPUCCINO_COST);
+                    backToMainMenu(choice, cash);
+                } else goto money_deposit;
             }
             else if (choice == 4){
-                takeCoffee(cups, cash, LATTE_COST);
-                backToMainMenu(choice, cash);
+                if (cash >= LATTE_COST){
+                    takeCoffee(cups, cash, LATTE_COST);
+                    backToMainMenu(choice, cash);
+                } else goto money_deposit;
             }
             else if (choice == 5){
                 service_menu:
