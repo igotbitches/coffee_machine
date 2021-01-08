@@ -79,13 +79,21 @@ int main(){
                     else if (choice == 3){
                         break;
                     }
-                }
+                    else {
+	                	cout << "Try again!";
+	                	Sleep(300);
+                	}
+				}
             }
             else {
                 cout << "The machine is blocked.";
                 return -1;
             }
         }
+        else {
+        	cout << "Unknown command!";
+        	Sleep(300);
+		}
     }
     return 0;
 }
