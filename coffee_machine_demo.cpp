@@ -49,6 +49,7 @@ int main(){
                 }
             	else{
             		cout << "Unknown coin!" << endl << endl;
+            		Sleep(300);
             	}
             }
         }
@@ -84,9 +85,6 @@ int main(){
                 cout << "The machine is blocked.";
                 return -1;
             }
-        }
-        else {
-            cout << endl << "Please, choice another." << endl << endl;
         }
     }
     return 0;
@@ -172,7 +170,6 @@ void inputMoney(double &total, double &cash, double coin)
 {
     total += coin;
     cash += coin;
-    cout << "Your deposit: " << coin << " BYN" << endl << endl;
 }
 
 int checkPIN()
@@ -211,13 +208,9 @@ void addCups(int &cups)
     cout << "How many cups are you adding?: " ;
     cin >> inputCups;
 
-    if (inputCups < 0){
-        cout << "You need to put 1 or more cups!" << endl << endl;
-    }
-    else{
-        cups += inputCups;
-        cout << "Completed! "<< inputCups << " cups added." << endl << endl;
-    }
+    if (inputCups > 0){
+    	cups += inputCups;
+	}
 }
 
 void takeCash(double &total, double &cash)
